@@ -5,12 +5,13 @@ import Queen
 import Rook
 import Bishop
 
+
+class PinStatus(Enum):
+    NOT_PINNED = 0
+    PINNED_VERT = 1
+    PINNED_HORZ = 2
+    PINNED_DIAG = 3
 class Piece(ABC):
-    class PinStatus(Enum):
-        NOT_PINNED = 0
-        PINNED_VERT = 1
-        PINNED_HORZ = 2
-        PINNED_DIAG = 3
     def __init__(self, color: Color, index: int, arr, is_pinned: PinStatus = PinStatus.NOT_PINNED):
         self.color = color
         self.index = index
