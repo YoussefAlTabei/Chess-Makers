@@ -1,12 +1,14 @@
 from __future__ import annotations
-from abc import ABC, abstractmethod
-from Color import Color
-from Pawn import Pawn
+
+from abc import ABC
+
 from Bishop import Bishop
-from Knight import Knight
-from Rook import Rook
-from Queen import Queen
+from Color import Color
 from King import King
+from Knight import Knight
+from Pawn import Pawn
+from Queen import Queen
+from Rook import Rook
 
 
 class PiecesFactory(ABC):
@@ -19,43 +21,40 @@ class PiecesFactory(ABC):
 
     def create_pawn(self) -> Pawn:
         """
-        Create a pawn
-        :return:   Pawn
+        Create a pawn        :return:
         """
         return Pawn(self.color)
 
     def create_bishop(self) -> Bishop:
         """
-        Create a bishop
-        :return:    Bishop
+        Create a bishop        :return:
         """
         return Bishop(self.color)
 
     def create_knight(self) -> Knight:
         """
-        Create a knight
-        :return:    Knight
+        Create a knight        :return:
         """
         return Knight(self.color)
 
     def create_rooks(self) -> Rook:
         """
         Create a rook
-        :return:    Rook
+        :return:
         """
         return Rook(self.color)
 
     def create_queen(self) -> Queen:
         """
         Create a queen
-        :return:    Queen
+        :return:
         """
         return Queen(self.color)
 
     def create_king(self) -> King:
         """
         Create a king
-        :return:    King
+        :return:
         """
         return King(self.color)
 
@@ -83,7 +82,6 @@ class BlackFactory(PiecesFactory):
 
 
 if __name__ == '__main__':
-    from Color import Color
     white_factory = WhiteFactory()
     white_pawn = white_factory.create_pawn()
     white_bishop = white_factory.create_bishop()

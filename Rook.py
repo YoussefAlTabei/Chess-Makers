@@ -1,6 +1,7 @@
 from Pieces import Piece
 from Pieces import PinStatus
 import Empty
+
 class Rook(Piece):
     def __init__(self, color, index):
         super().__init__(color)
@@ -29,3 +30,4 @@ class Rook(Piece):
                     legal_moves.append(temp2)
                     temp2 -= 1
         return legal_moves
+
