@@ -1,5 +1,5 @@
 from Pieces import Piece
-from Pieces import Piece, PinStatus
+from Pieces import PinStatus
 class Rook(Piece):
     def __init__(self, color, index):
         super().__init__(color)
@@ -8,5 +8,5 @@ class Rook(Piece):
         self.pin_state = PinStatus.NOT_PINNED
     def check_legal_moves(self):
         legal_moves = []
-        if self.pin_state = PINNED_DIAG:
-            
+        if self.pin_state == PinStatus.PINNED_DIAG:
+            pass
