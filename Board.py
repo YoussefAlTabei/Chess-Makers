@@ -1,5 +1,7 @@
 import pygame
+
 from BoardPalettes import BoardPalettes
+
 
 class Board:
     """
@@ -30,8 +32,17 @@ class Board:
         pygame.display.update()
 
     def set_palette(self, palette: BoardPalettes):
+        """
+        Set the palette of the board
+        :param palette:
+        :return:
+        """
         self.palette = palette
         self.draw_board()
 
-    def get_palette(self):
+    def get_palette(self) -> BoardPalettes:
+        """
+        Get the palette of the board
+        :return:
+        """
         return self.palette
