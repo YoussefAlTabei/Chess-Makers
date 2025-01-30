@@ -39,19 +39,22 @@ class PiecesFactory(ABC):
 
     def create_rooks(self) -> Rook:
         """
-        Create a rook        :return:
+        Create a rook
+        :return:
         """
         return Rook(self.color)
 
     def create_queen(self) -> Queen:
         """
-        Create a queen        :return:
+        Create a queen
+        :return:
         """
         return Queen(self.color)
 
     def create_king(self) -> King:
         """
-        Create a king        :return:
+        Create a king
+        :return:
         """
         return King(self.color)
 

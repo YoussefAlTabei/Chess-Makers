@@ -9,7 +9,12 @@ class Pawn(Piece):
         self.has_moved = False
         self.pin_state = PinStatus.NOT_PINNED
         self.en_passant = False
+
     def check_legal_moves(self):
+        """
+        Check the legal moves for the pawn
+        :return:    List of legal moves
+        """
         legal_moves = []
         if self.pin_state != PinStatus.PINNED_DIAG and self.pin_state != PinStatus.PINNED_HORZ:
             if isinstance(super().arr[self.index + 8], Empty):
