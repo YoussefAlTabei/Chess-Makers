@@ -9,6 +9,12 @@ class Queen(Rook, Bishop):
         self.index = index
         self.pin_state = PS.NOT_PINNED
     def check_legal_queen(self):
+        """
+        Check the legal moves for the Queen
+
+        Returns:
+            arr[int]: list of indexes of legal moves for the Queen
+        """
         legal_moves = []
         legal_moves += self.check_legal_rook()
         legal_moves += self.check_legal_bishop()
