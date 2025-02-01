@@ -1,12 +1,17 @@
 from Pieces import Piece
-import Empty, Rook, Bishop, Queen, Knight, Pawn
+from Empty import Empty
+from Rook import Rook
+from Bishop import Bishop
+from Queen import Queen
+from Knight import Knight
+from Pawn import Pawn
 import Color as c
 class King(Piece):
     """
     King class that inherits from Piece
     """
-    def __init__(self, color, index,arr):
-        super().__init__(color)
+    def __init__(self, color, index):
+        super().__init__(color, index)
         self.index = index
         self.in_check = False
         self.has_moved = False

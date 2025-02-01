@@ -1,9 +1,9 @@
 from Pieces import Piece
-import PinStatus as PS
+from PinStatus import PinStatus as PS
 
 class Knight(Piece):
     def __init__(self, color, index):
-        super().__init__(color)
+        super().__init__(color, index)
         self.index = index
         self.pin_state = PS.NOT_PINNED
     def check_legal(self):

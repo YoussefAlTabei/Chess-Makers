@@ -1,10 +1,10 @@
 from Pieces import Piece
-import PinStatus
+from PinStatus import PinStatus
 import Empty
 
 class Rook(Piece):
     def __init__(self, color, index):
-        super().__init__(color)
+        super().__init__(color, index)
         self.index = index
         self.has_moved = False
         self.pin_state = PinStatus.NOT_PINNED

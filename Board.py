@@ -25,9 +25,11 @@ class Board:
         for row in range(8):
             for col in range(8):
                 if (row + col) % 2 == 0:
-                    color = self.palette[1].value
+                    color = self.palette[1]
+                    # print(color)
                 else:
-                    color = self.palette[0].value
+                    color = self.palette[0]
+                    # print(color)
                 pygame.draw.rect(self.screen, color, [col * 100, row * 100, 100, 100])
         pygame.display.update()
 

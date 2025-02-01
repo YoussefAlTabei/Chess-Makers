@@ -1,5 +1,3 @@
-from Pieces import Piece
-
-class Empty(Piece):
-    def __init__(self):
-        super().__init__()
+class Empty():
+    def __init__(self, index):
+        self.index = index

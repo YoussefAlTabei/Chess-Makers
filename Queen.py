@@ -1,11 +1,11 @@
 from Pieces import Piece
-import Empty
-import PinStatus as PS
-import Rook
-import Bishop
+from Empty import Empty
+from PinStatus import PinStatus as PS
+from Rook import Rook
+from Bishop import Bishop
 class Queen(Rook, Bishop):
     def __init__(self, color, index):
-        super().__init__(color)
+        super().__init__(color, index)
         self.index = index
         self.pin_state = PS.NOT_PINNED
     def check_legal_queen(self):
