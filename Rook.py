@@ -1,5 +1,5 @@
 from Pieces import Piece
-from Pieces import PinStatus
+import PinStatus
 import Empty
 
 class Rook(Piece):
@@ -8,7 +8,13 @@ class Rook(Piece):
         self.index = index
         self.has_moved = False
         self.pin_state = PinStatus.NOT_PINNED
-    def check_legal_moves(self):
+    def check_legal_rook(self):
+        """
+        Check the legal moves for the rook
+    
+        Returns:
+             arr[int]: list of indexes of legal moves for the rook
+        """
         legal_moves = []
         if self.pin_state != PinStatus.PINNED_DIAG:
             if self.pin_state != PinStatus.PINNED_HORZ:

@@ -1,5 +1,5 @@
 from Pieces import Piece
-from Pieces import Piece, PinStatus
+import PinStatus
 import Empty
 class Pawn(Piece):
 
@@ -13,7 +13,8 @@ class Pawn(Piece):
     def check_legal_moves(self):
         """
         Check the legal moves for the pawn
-        :return:    List of legal moves
+        
+        arr[int]: list of indexes of legal moves for the pawn
         """
         legal_moves = []
         if self.pin_state != PinStatus.PINNED_DIAG and self.pin_state != PinStatus.PINNED_HORZ:
