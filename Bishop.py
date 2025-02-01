@@ -1,10 +1,10 @@
 from Pieces import Piece
-import PinStatus as PS
+from PinStatus import PinStatus as PS
 import Empty
 class Bishop(Piece):
-    def __init__(self, color):
-        super().__init__(color)
-        self.index = None
+    def __init__(self, color,index):
+        super().__init__(color, index)
+        self.index = index
         self.pin_state = PS.NOT_PINNED
     def check_legal_bishop(self):
         """

@@ -1,4 +1,5 @@
 import pygame
+from PiecesFactory import WhiteFactory, BlackFactory
 
 class Draw_pieces:
     """
@@ -43,7 +44,6 @@ class Draw_pieces:
             else:  # White pawns
                 for i in range(8):
                     self.screen.blit(pawn_image, (i * self.square_size, 6 * self.square_size))
-
     def draw_black_pieces(self):
         """
         Draw the black chess pieces
@@ -75,3 +75,34 @@ class Draw_pieces:
             row = mouse_y // self.square_size
             col = mouse_x // self.square_size
             print(row, col)
+            index = row * 8 + col
+            print (index)
+@staticmethod
+def initate_pieces(board_Array):
+    white_factory = WhiteFactory()
+    black_factory = BlackFactory()
+
+    # Place white pieces
+    board_Array[0] = white_factory.create_rooks(index=0)      # a1
+    board_Array[1] = white_factory.create_knight(index=1)     # b1
+    board_Array[2] = white_factory.create_bishop(index=2)     # c1
+    board_Array[3] = white_factory.create_queen(index=3)      # d1
+    board_Array[4] = white_factory.create_king(index=4)       # e1
+    board_Array[5] = white_factory.create_bishop(index=5)     # f1
+    board_Array[6] = white_factory.create_knight(index=6)     # g1
+    board_Array[7] = white_factory.create_rooks(index=7)      # h1
+    for i in range(8, 16):                                    # a2 to h2
+        board_Array[i] = white_factory.create_pawn(index=i)
+
+    # Place black pieces
+    board_Array[56] = black_factory.create_rooks(index=56)    # a8
+    board_Array[57] = black_factory.create_knight(index=57)   # b8
+    board_Array[58] = black_factory.create_bishop(index=58)   # c8
+    board_Array[59] = black_factory.create_queen(index=59)    # d8
+    board_Array[60] = black_factory.create_king(index=60)     # e8
+    board_Array[61] = black_factory.create_bishop(index=61)   # f8
+    board_Array[62] = black_factory.create_knight(index=62)   # g8
+    board_Array[63] = black_factory.create_rooks(index=63)    # h8
+    for i in range(48, 56):                                   # a7 to h7
+        board_Array[i] = black_factory.create_pawn(index=i)
+
