@@ -1,17 +1,11 @@
 from abc import ABC
-
 import Color
-from enum import Enum
 import Queen
 import Rook
 import Bishop
+import PinStatus
 
 
-class PinStatus(Enum):
-    NOT_PINNED = 0
-    PINNED_VERT = 1
-    PINNED_HORZ = 2
-    PINNED_DIAG = 3
 class Piece(ABC):
     def __init__(self, color: Color, index: int, arr, is_pinned: PinStatus = PinStatus.NOT_PINNED):
         self.color = color
@@ -58,6 +52,7 @@ class Piece(ABC):
                 temp += 1
                 if isinstance(self.arr[piece_file * 8 + temp], (Queen, Rook)):
                     return self.PinStatus.PINNED_HORZ
+        return self.PinStatus.NOT_PINNED
     def check_Diagonal_pin(self,king_index, piece_index):
         """
         checks if the piece is pinned to the king in a diagonal directions
@@ -102,5 +97,6 @@ class Piece(ABC):
                 temp_file -= 1
                 temp_rank -= 1
                 if isinstance(self.arr[temp_file * 8 + temp_rank], (Queen, Bishop)):
-                    return self.PinStatus.PINNED_DIAG               
+                    return self.PinStatus.PINNED_DIAG        
+        return self.PinStatus.NOT_PINNED      
         
