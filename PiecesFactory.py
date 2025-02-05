@@ -19,47 +19,47 @@ class PiecesFactory(ABC):
     def __init__(self):
         self.color = ""
 
-    def create_pawn(self, index: int) -> Pawn:
+    def create_pawn(self, index: int, arr: list) -> Pawn:
         """
         Create a pawn
         :return:
         """
-        return Pawn(self.color, index)
+        return Pawn(self.color, index, arr)
 
-    def create_bishop(self, index: int) -> Bishop:
+    def create_bishop(self, index: int, arr: list) -> Bishop:
         """
         Create a bishop
         :return:
         """
-        return Bishop(self.color, index)
+        return Bishop(self.color, index, arr)
 
-    def create_knight(self, index: int) -> Knight:
+    def create_knight(self, index: int, arr: list) -> Knight:
         """
         Create a knight
         :return:
         """
-        return Knight(self.color, index)
+        return Knight(self.color, index, arr)
 
-    def create_rooks(self, index: int) -> Rook:
+    def create_rooks(self, index: int, arr: list) -> Rook:
         """
         Create a rook
         :return:
         """
-        return Rook(self.color, index)
+        return Rook(self.color, index, arr)
 
-    def create_queen(self, index: int) -> Queen:
+    def create_queen(self, index: int, arr: list) -> Queen:
         """
         Create a queen
         :return:
         """
-        return Queen(self.color, index)
+        return Queen(self.color, index, arr)
 
-    def create_king(self, index: int) -> King:
+    def create_king(self, index: int, arr: list) -> King:
         """
         Create a king
         :return:
         """
-        return King(self.color, index)
+        return King(self.color, index, arr)
 
 
 class WhiteFactory(PiecesFactory):

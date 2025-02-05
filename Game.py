@@ -22,12 +22,17 @@ pieces.draw_white_pieces()
 pieces.draw_black_pieces()
 # Main game loop
 running = True
+for p in board_Array:
+    if not isinstance(p, Empty):
+        print(p, p.index)
+        print(p.get_moves())
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pieces.handle_mouse_event(event)
+    
     # Fill the screen with a background color 
 
 
