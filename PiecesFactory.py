@@ -23,6 +23,8 @@ class PiecesFactory(ABC):
         """
         Create a pawn
         :return:
+        Create a pawn
+        :return:
         """
         return Pawn(self.color, index, arr)
 
@@ -30,11 +32,15 @@ class PiecesFactory(ABC):
         """
         Create a bishop
         :return:
+        Create a bishop
+        :return:
         """
         return Bishop(self.color, index, arr)
 
     def create_knight(self, index: int, arr: list) -> Knight:
         """
+        Create a knight
+        :return:
         Create a knight
         :return:
         """
@@ -91,6 +97,12 @@ if __name__ == '__main__':
     white_rooks = white_factory.create_rooks(4)
     white_queen = white_factory.create_queen(5)
     white_king = white_factory.create_king(6)
+    white_pawn = white_factory.create_pawn(1)
+    white_bishop = white_factory.create_bishop(2)
+    white_knight = white_factory.create_knight(3)
+    white_rooks = white_factory.create_rooks(4)
+    white_queen = white_factory.create_queen(5)
+    white_king = white_factory.create_king(6)
     print(white_pawn)
     print(white_bishop)
     print(white_knight)
@@ -98,6 +110,12 @@ if __name__ == '__main__':
     print(white_queen)
     print(white_king)
     black_factory = BlackFactory()
+    black_pawn = black_factory.create_pawn(1)
+    black_bishop = black_factory.create_bishop(2)
+    black_knight = black_factory.create_knight(3)
+    black_rooks = black_factory.create_rooks(4)
+    black_queen = black_factory.create_queen(5)
+    black_king = black_factory.create_king(6)
     black_pawn = black_factory.create_pawn(1)
     black_bishop = black_factory.create_bishop(2)
     black_knight = black_factory.create_knight(3)

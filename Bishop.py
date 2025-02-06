@@ -1,5 +1,6 @@
 from Pieces import Piece
 from PinStatus import PinStatus as PS
+from PinStatus import PinStatus as PS
 import Empty
 from Color import Color as c 
 class Bishop(Piece):

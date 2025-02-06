@@ -4,11 +4,18 @@ from PinStatus import PinStatus
 
 
 class Piece(ABC):
+<<<<<<< HEAD
     def __init__(self, color: Color,arr, index: int, is_pinned: PinStatus = PinStatus.NOT_PINNED):
         self.color = color
         self.index = index
         self.is_pinned = is_pinned
         self.arr = arr
+=======
+    def __init__(self, color: Color, index: int, is_pinned: PinStatus = PinStatus.NOT_PINNED):
+        self.color = color
+        self.index = index
+        self.is_pinned = is_pinned
+>>>>>>> 47ad97eaf16a35a6cb1048d3af2a2ad936cb3112
     def __repr__(self):
         """
         Returns a string representation of the chess piece.

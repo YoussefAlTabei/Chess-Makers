@@ -1,5 +1,6 @@
 from Pieces import Piece
 from PinStatus import PinStatus
+from PinStatus import PinStatus
 import Empty
 from Color import Color as c
 class Rook(Piece):

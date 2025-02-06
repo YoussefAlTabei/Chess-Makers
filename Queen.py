@@ -3,6 +3,10 @@ from Empty import Empty
 from PinStatus import PinStatus as PS
 from Rook import Rook
 from Bishop import Bishop
+from Empty import Empty
+from PinStatus import PinStatus as PS
+from Rook import Rook
+from Bishop import Bishop
 class Queen(Rook, Bishop):
     def __init__(self, color, index,arr):
         super().__init__(color,arr, index)
