@@ -19,47 +19,53 @@ class PiecesFactory(ABC):
     def __init__(self):
         self.color = ""
 
-    def create_pawn(self, index: int) -> Pawn:
+    def create_pawn(self, index: int, arr: list) -> Pawn:
         """
         Create a pawn
         :return:
+        Create a pawn
+        :return:
         """
-        return Pawn(self.color, index)
+        return Pawn(self.color, index, arr)
 
-    def create_bishop(self, index: int) -> Bishop:
+    def create_bishop(self, index: int, arr: list) -> Bishop:
         """
         Create a bishop
         :return:
+        Create a bishop
+        :return:
         """
-        return Bishop(self.color, index)
+        return Bishop(self.color, index, arr)
 
-    def create_knight(self, index: int) -> Knight:
+    def create_knight(self, index: int, arr: list) -> Knight:
         """
         Create a knight
         :return:
+        Create a knight
+        :return:
         """
-        return Knight(self.color, index)
+        return Knight(self.color, index, arr)
 
-    def create_rooks(self, index: int) -> Rook:
+    def create_rooks(self, index: int, arr: list) -> Rook:
         """
         Create a rook
         :return:
         """
-        return Rook(self.color, index)
+        return Rook(self.color, index, arr)
 
-    def create_queen(self, index: int) -> Queen:
+    def create_queen(self, index: int, arr: list) -> Queen:
         """
         Create a queen
         :return:
         """
-        return Queen(self.color, index)
+        return Queen(self.color, index, arr)
 
-    def create_king(self, index: int) -> King:
+    def create_king(self, index: int, arr: list) -> King:
         """
         Create a king
         :return:
         """
-        return King(self.color, index)
+        return King(self.color, index, arr)
 
 
 class WhiteFactory(PiecesFactory):
@@ -91,6 +97,12 @@ if __name__ == '__main__':
     white_rooks = white_factory.create_rooks(4)
     white_queen = white_factory.create_queen(5)
     white_king = white_factory.create_king(6)
+    white_pawn = white_factory.create_pawn(1)
+    white_bishop = white_factory.create_bishop(2)
+    white_knight = white_factory.create_knight(3)
+    white_rooks = white_factory.create_rooks(4)
+    white_queen = white_factory.create_queen(5)
+    white_king = white_factory.create_king(6)
     print(white_pawn)
     print(white_bishop)
     print(white_knight)
@@ -98,6 +110,12 @@ if __name__ == '__main__':
     print(white_queen)
     print(white_king)
     black_factory = BlackFactory()
+    black_pawn = black_factory.create_pawn(1)
+    black_bishop = black_factory.create_bishop(2)
+    black_knight = black_factory.create_knight(3)
+    black_rooks = black_factory.create_rooks(4)
+    black_queen = black_factory.create_queen(5)
+    black_king = black_factory.create_king(6)
     black_pawn = black_factory.create_pawn(1)
     black_bishop = black_factory.create_bishop(2)
     black_knight = black_factory.create_knight(3)

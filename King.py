@@ -5,16 +5,20 @@ from Bishop import Bishop
 from Queen import Queen
 from Knight import Knight
 from Pawn import Pawn
-import Color as c
+from Color import Color as c
 class King(Piece):
     """
     King class that inherits from Piece
     """
-    def __init__(self, color, index):
-        super().__init__(color, index)
+
+    def __init__(self, color, index, arr):
+        super().__init__(color,arr, index)
         self.index = index
         self.in_check = False
         self.has_moved = False
+        self.arr = arr
+        color_dir = 1 if self.color == c.WHITE else -1 
+
     def check(self,enemy_list):
         """determines wether the king is in check
         Args:
@@ -23,6 +27,7 @@ class King(Piece):
         Returns:
             bool: True if king is in check, False otherwise
         """
+        
         king_file = self.index % 8
         king_rank = self.index // 8
         for p in enemy_list:
@@ -40,14 +45,14 @@ class King(Piece):
                     return True
             if isinstance(p, Pawn):
                 if p.color == c.WHITE:
-                    if p.index % 8 == king_file + 1 and p.index // 8 == king_rank + 1:
+                    if p.index % 8 == king_file + 1 * self.color_dir and p.index // 8 == king_rank + 1* self.color_dir:
                         return True
-                    if p.index % 8 == king_file - 1 and p.index // 8 == king_rank + 1:
+                    if p.index % 8 == king_file - 1 * self.color_dir and p.index // 8 == king_rank + 1 * self.color_dir:
                         return True
                 if p.color == c.BLACK:
-                    if p.index % 8 == king_file + 1 and p.index // 8 == king_rank - 1:
+                    if p.index % 8 == king_file + 1 * self.color_dir and p.index // 8 == king_rank - 1 * self.color_dir:
                         return True
-                    if p.index % 8 == king_file - 1 and p.index // 8 == king_rank - 1:
+                    if p.index % 8 == king_file - 1 * self.color_dir and p.index // 8 == king_rank - 1 * self.color_dir:
                         return True
         def rook_check(self,p):
             """determines if the king is in check by a rook
@@ -64,7 +69,7 @@ class King(Piece):
                 if dir < 0: dir = 1
                 else: dir = -1
                 while temp != p.index % 8:
-                    temp += 8 * dir
+                    temp += 8 * dir * self.color_dir
                     if not isinstance(self.arr[8*king_rank+temp],Empty):
                         return False
                 return True
@@ -74,7 +79,7 @@ class King(Piece):
                 if dir < 0: dir = 1
                 else: dir = -1
                 while temp != p.index // 8:
-                    temp += dir
+                    temp += dir * self.color_dir
                     if not isinstance(self.arr[temp * 8 + king_file],Empty):
                         return False
                 return True
@@ -97,11 +102,20 @@ class King(Piece):
                 temp_x = king_file
                 temp_y = king_rank
                 while temp_x != p.index % 8 and temp_y != p.index // 8:
-                    temp_x += x_dir
-                    temp_y += y_dir
+                    temp_x += x_dir * self.color_dir
+                    temp_y += y_dir * self.color_dir
                     if not isinstance(self.arr[temp_y * 8 + temp_x],Empty):
                         return False
                 return True
+    def get_moves(self):    
+        """gets the legal moves of the king
+
+        Returns:
+            array (int): indexes of legal moves
+        """
+        self.legal_moves = []
+        self.check_legal_moves()
+        return self.legal_moves
     def check_legal_moves(self):
         """checks the legal moves of the king
 
@@ -110,7 +124,7 @@ class King(Piece):
         """
         for i in [-9,-8,-7,-1,1,7,8,9]:
             if self.index + i >= 0 and self.index + i < 64:
-                if self.arr[self.index + i].color != self.color:
-                    if not self.check(self.arr[self.index + i]):
+                if isinstance(self.arr[self.index + i], Empty) or self.arr[self.index + i].color != self.color:
+                    if not self.check([self.arr[self.index + i]]):
                         self.legal_moves.append(self.index + i)
         return self.legal_moves
