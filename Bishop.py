@@ -28,42 +28,39 @@ class Bishop(Piece):
             arr[int]: list of indexes of legal moves for the bishop
         """
         legal_moves = []
-        color_dir = 1 if self.color == c.WHITE else -1
+       # color_dir = 1 if self.color == c.WHITE else -1
         if self.pin_state != PS.PINNED_HORZ and self.pin_state != PS.PINNED_VERT:
             legal_moves = []
-            temp = self.index + 7 * color_dir
-            while temp % 8 != 0 and temp > 7 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
+            temp = self.index + 7 
+            while temp <= 63 and temp >= 0 and temp % 8 != 0 and temp > 7 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
                 if not isinstance(self.arr[temp], Empty.Empty) and  self.arr[temp].color != self.color:
                     break
-                temp += 7  * color_dir
-            if temp <= 63 and temp >= 0 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
+                temp += 7   
+            if temp <= 63 and temp >= 0 and temp % 8 != 7 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
-            temp = self.index + 9  * color_dir
+            temp = self.index + 9   
             while  temp <= 63 and temp >= 0 and temp % 8 != 7 and temp < 56 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
                 if not isinstance(self.arr[temp], Empty.Empty) and self.arr[temp].color != self.color:
                     break
-                temp += 9  * color_dir
-            if temp <= 63 and temp >= 0 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
+                temp += 9   
+            if temp <= 63 and temp >= 0 and temp % 8 != 0 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
-            temp = self.index - 7  * color_dir
+            temp = self.index - 7   
             while  temp <= 63 and temp >= 0 and temp % 8 != 7 and temp > 7 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
                 if not isinstance(self.arr[temp], Empty.Empty) and self.arr[temp].color != self.color:
                     break
-                temp -= 7  * color_dir
-            if temp <= 63 and temp >= 0 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
+                temp -= 7   
+            if temp <= 63 and temp >= 0 and temp % 8 != 0 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
-            temp = self.index - 9  * color_dir
+            temp = self.index - 9   
             while  temp <= 63 and temp >= 0 and  temp % 8 != 0 and temp < 56 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
                 if not isinstance(self.arr[temp], Empty.Empty) and self.arr[temp].color != self.color:
                     break
-                temp -= 9  * color_dir
-                if not isinstance(self.arr[temp], Empty.Empty) and self.arr[temp].color != self.color:
-                    break
-                temp -= 9  * color_dir
-            if temp <= 63 and temp >= 0 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
+                temp -= 9    
+            if temp <= 63 and temp >= 0 and temp % 8 !=7  and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):
                 legal_moves.append(temp)
             return legal_moves

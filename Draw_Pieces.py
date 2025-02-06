@@ -92,8 +92,8 @@ def initate_pieces(board_Array):
     board_Array[5] = white_factory.create_bishop(index=5, arr=board_Array)     # f1
     board_Array[6] = white_factory.create_knight(index=6, arr=board_Array)     # g1
     board_Array[7] = white_factory.create_rooks(index=7, arr=board_Array)      # h1
-    for i in range(8, 16):                                                     # a2 to h2
-        board_Array[i] = white_factory.create_pawn(index=i, arr=board_Array)
+    # for i in range(8, 16):                                                     # a2 to h2
+    #     board_Array[i] = white_factory.create_pawn(index=i, arr=board_Array)
 
     # Place black pieces
     board_Array[56] = black_factory.create_rooks(index=56, arr=board_Array)    # a8
