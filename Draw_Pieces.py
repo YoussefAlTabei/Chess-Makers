@@ -5,7 +5,7 @@ class Draw_pieces:
     """
     Class to draw the chess pieces
     """
-    white_Pieces = ['white_bishop.png', 'white_king.png', 'white_knight.png', 'white_pawn.png', 'white_queen.png', 'white_rook.png']
+    white_Pieces = [ 'white_king.png', 'white_knight.png','white_bishop.png', 'white_pawn.png', 'white_queen.png', 'white_rook.png']
     black_Pieces = ['black_bishop.png', 'black_king.png', 'black_knight.png', 'black_pawn.png', 'black_queen.png', 'black_rook.png']
 
     def __init__(self, screen, square_size):
@@ -25,7 +25,7 @@ class Draw_pieces:
         Draw the white chess pieces
         """
         for piece in self.white_Pieces:
-            pawn_image = pygame.image.load("pieces_photos/white_pieces/" + piece)  
+            pawn_image = pygame.image.load("/Images/pieces_photos/white_pieces/" + piece)  
             pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
 
             if piece == 'white_bishop.png':
@@ -49,7 +49,8 @@ class Draw_pieces:
         Draw the black chess pieces
         """
         for piece in self.black_Pieces:
-            pawn_image = pygame.image.load("pieces_photos/black_pieces/" + piece)  
+            
+            pawn_image = pygame.image.load("Images/pieces_photos/white_pieces/" + piece)  
             pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
 
             if piece == 'black_bishop.png':
@@ -68,41 +69,37 @@ class Draw_pieces:
             else:  # Black pawns
                 for i in range(8):
                     self.screen.blit(pawn_image, (i * self.square_size, 1 * self.square_size))
-    def handle_mouse_event(self, event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            # Check if a piece is clicked
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-            row = mouse_y // self.square_size
-            col = mouse_x // self.square_size
-            print(row, col)
-            index = row * 8 + col
-            print (index)
+    def draw_circle(self,arr):
+        posible_move = pygame.image.load("Images/Grey_circle.png") 
+        posible_move = pygame.transform.scale(posible_move, (self.square_size, self.square_size)) 
+        for i in arr:
+            self.screen.blit(posible_move, (i % 8 * self.square_size, i // 8 * self.square_size))
 @staticmethod
 def initate_pieces(board_Array):
     white_factory = WhiteFactory()
     black_factory = BlackFactory()
 
     # Place white pieces
-    board_Array[0] = white_factory.create_rooks(index=0)      # a1
-    board_Array[1] = white_factory.create_knight(index=1)     # b1
-    board_Array[2] = white_factory.create_bishop(index=2)     # c1
-    board_Array[3] = white_factory.create_queen(index=3)      # d1
-    board_Array[4] = white_factory.create_king(index=4)       # e1
-    board_Array[5] = white_factory.create_bishop(index=5)     # f1
-    board_Array[6] = white_factory.create_knight(index=6)     # g1
-    board_Array[7] = white_factory.create_rooks(index=7)      # h1
+    board_Array[0] = white_factory.create_rooks(index=0, arr=board_Array)      # a1
+    board_Array[1] = white_factory.create_knight(index=1, arr=board_Array)     # b1
+    board_Array[2] = white_factory.create_bishop(index=2, arr=board_Array)     # c1
+    board_Array[3] = white_factory.create_queen(index=3, arr=board_Array)      # d1
+    board_Array[4] = white_factory.create_king(index=4, arr=board_Array)       # e1
+    board_Array[5] = white_factory.create_bishop(index=5, arr=board_Array)     # f1
+    board_Array[6] = white_factory.create_knight(index=6, arr=board_Array)     # g1
+    board_Array[7] = white_factory.create_rooks(index=7, arr=board_Array)      # h1
     for i in range(8, 16):                                    # a2 to h2
-        board_Array[i] = white_factory.create_pawn(index=i)
+        board_Array[i] = white_factory.create_pawn(index=i, arr=board_Array)
 
     # Place black pieces
-    board_Array[56] = black_factory.create_rooks(index=56)    # a8
-    board_Array[57] = black_factory.create_knight(index=57)   # b8
-    board_Array[58] = black_factory.create_bishop(index=58)   # c8
-    board_Array[59] = black_factory.create_queen(index=59)    # d8
-    board_Array[60] = black_factory.create_king(index=60)     # e8
-    board_Array[61] = black_factory.create_bishop(index=61)   # f8
-    board_Array[62] = black_factory.create_knight(index=62)   # g8
-    board_Array[63] = black_factory.create_rooks(index=63)    # h8
+    board_Array[56] = black_factory.create_rooks(index=56, arr=board_Array)    # a8
+    board_Array[57] = black_factory.create_knight(index=57, arr=board_Array)   # b8
+    board_Array[58] = black_factory.create_bishop(index=58, arr=board_Array)   # c8
+    board_Array[59] = black_factory.create_queen(index=59, arr=board_Array)    # d8
+    board_Array[60] = black_factory.create_king(index=60, arr=board_Array)     # e8
+    board_Array[61] = black_factory.create_bishop(index=61, arr=board_Array)   # f8
+    board_Array[62] = black_factory.create_knight(index=62, arr=board_Array)   # g8
+    board_Array[63] = black_factory.create_rooks(index=63, arr=board_Array)    # h8
     for i in range(48, 56):                                   # a7 to h7
-        board_Array[i] = black_factory.create_pawn(index=i)
+        board_Array[i] = black_factory.create_pawn(index=i, arr=board_Array)
 

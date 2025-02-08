@@ -3,6 +3,7 @@ import Board
 from BoardPalettes import BoardPalettes as bp
 import Draw_Pieces as dp
 from Empty import Empty
+import Mouse_events as me
 pygame.init()
 # Initialize the board as a 1D list with 64 elements
 board_Array = [Empty(_) for _ in range(64)]
@@ -37,7 +38,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            pieces.handle_mouse_event(event)
+            me.handle_mouse_event(event,dp)
     
     # Fill the screen with a background color 
 
