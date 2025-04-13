@@ -37,12 +37,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            pieces.handle_mouse_event(event)
-    
+          # pieces.handle_mouse_event(event)
+          pass
+
+                    
     # Fill the screen with a background color 
 
 
-    # Update the display
+# Update the display
     pygame.display.flip()
 
 # Quit Pygame
