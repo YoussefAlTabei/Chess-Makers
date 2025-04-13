@@ -10,7 +10,8 @@ class Rook(Piece):
         self.has_moved = False
         self.pin_state = PinStatus.NOT_PINNED
         self.arr = arr
-
+        self.name = "rook"
+        
     def get_moves(self):
         """
         Get the legal moves for the rook
@@ -30,7 +31,7 @@ class Rook(Piece):
              arr[int]: list of indexes of legal moves for the rook
         """
         legal_moves = []
-        color_dir = 1 if self.color == c.WHITE else -1 
+        color_dir = -1 if self.color == c.WHITE else 1 
         if self.pin_state != PinStatus.PINNED_DIAG:
             if self.pin_state != PinStatus.PINNED_HORZ:
                 temp = self.index + 8 * color_dir

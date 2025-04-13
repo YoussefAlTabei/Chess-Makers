@@ -13,6 +13,7 @@ class Queen(Rook, Bishop):
         self.index = index
         self.pin_state = PS.NOT_PINNED
         self.arr = arr
+        self.name = "queen"
     def get_moves(self):
         """
         Get the legal moves for the Queen

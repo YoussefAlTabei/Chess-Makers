@@ -17,8 +17,8 @@ class King(Piece):
         self.in_check = False
         self.has_moved = False
         self.arr = arr
-        color_dir = 1 if self.color == c.WHITE else -1 
-
+        color_dir = -1 if self.color == c.WHITE else 1 
+        self.name = "king"
     def check(self,enemy_list):
         """determines wether the king is in check
         Args:

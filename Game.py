@@ -22,16 +22,26 @@ pieces.draw_white_pieces()
 pieces.draw_black_pieces()
 # Main game loop
 running = True
-# temp = board_Array[35]
-# board_Array[35] = board_Array[58]
-# board_Array[58] = temp
-# board_Array[35].index = 35
-# print(board_Array[35], board_Array[58])
+temp = board_Array[35]
+board_Array[35] = board_Array[58]
+board_Array[58] = temp
+board_Array[35].index = 35
+print(board_Array[35], board_Array[58])
 for p in board_Array:
     #print(p,p.index)
     if not isinstance(p, Empty):
         print(p, p.index)
         print(p.get_moves())
+
+chess_board = Board.Board(screen,bp.MODERN_BLUE)
+screen.fill((255, 255, 255))
+chess_board.draw_board()
+temp = board_Array[22]
+board_Array[22] = board_Array[3]
+print(board_Array[22], board_Array[3])
+board_Array[3].index = 3
+board_Array[3] = temp
+dp.Draw_pieces.draw_pieces_from_array(pieces, board_Array)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

@@ -8,6 +8,7 @@ class Knight(Piece):
         self.index = index
         self.pin_state = PS.NOT_PINNED
         self.arr = arr
+        self.name = "knight"
     def get_moves(self):
         """
         Get the legal moves for the knight
@@ -24,7 +25,7 @@ class Knight(Piece):
          arr[int]: list of indexes of legal moves for the knight
         """
         legal_moves = []
-        color_dir = 1 if self.color == c.WHITE else -1
+        color_dir = -1 if self.color == c.WHITE else 1
         if self.pin_state == PS.NOT_PINNED:
             if self.index % 8 != 0 and self.index > 15 and (isinstance(self.arr[self.index - 17], Empty) or self.arr[self.index - 17].color != self.color):
                 legal_moves.append(self.index - 17)

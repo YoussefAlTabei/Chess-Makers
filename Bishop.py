@@ -9,7 +9,7 @@ class Bishop(Piece):
         self.index = index
         self.pin_state = PS.NOT_PINNED
         self.arr = arr
-
+        self.name = "bishop"
     def get_moves(self):
         """
         Get the legal moves for the bishop

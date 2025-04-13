@@ -11,6 +11,7 @@ class Pawn(Piece):
         self.pin_state = PinStatus.NOT_PINNED
         self.en_passant = False
         self.arr = arr
+        self.name = "pawn"
     def get_moves(self):
         """
         Get the legal moves for the pawn
@@ -28,7 +29,7 @@ class Pawn(Piece):
         arr[int]: list of indexes of legal moves for the pawn
         """
         legal_moves = []
-        color_direction = 1 if self.color == c.WHITE else -1 # 1 for white, -1 for black
+        color_direction = -1 if self.color == c.WHITE else 1 # 1 for white, -1 for black
         if self.pin_state != PinStatus.PINNED_DIAG and self.pin_state != PinStatus.PINNED_HORZ:
             if isinstance(self.arr[self.index + 8 * color_direction], Empty.Empty):
                 legal_moves.append(self.index + 8* color_direction)
