@@ -23,55 +23,55 @@ class Draw_pieces:
         self.selected_piece_pos = None  # Track the position of the selected piece
         self.dragging = False  # Track if a piece is being dragged
 
-    def draw_white_pieces(self):
-        """
-        Draw the white chess pieces
-        """
-        for piece in self.white_Pieces:
-            pawn_image = pygame.image.load(os.path.join("Images", "pieces_photos", "white_pieces", piece))
-            pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
+    # def draw_white_pieces(self):
+    #     """
+    #     Draw the white chess pieces
+    #     """
+    #     for piece in self.white_Pieces:
+    #         pawn_image = pygame.image.load(os.path.join("Images", "pieces_photos", "white_pieces", piece))
+    #         pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
 
-            if piece == 'white_bishop.png':
-                self.screen.blit(pawn_image, (2 * self.square_size, 7 * self.square_size))  # (col, row)
-                self.screen.blit(pawn_image, (5 * self.square_size, 7 * self.square_size))
-            elif piece == 'white_king.png':
-                self.screen.blit(pawn_image, (3 * self.square_size, 7 * self.square_size))
-            elif piece == 'white_rook.png':
-                self.screen.blit(pawn_image, (0 * self.square_size, 7 * self.square_size))
-                self.screen.blit(pawn_image, (7 * self.square_size, 7 * self.square_size))
-            elif piece == 'white_queen.png':
-                self.screen.blit(pawn_image, (4 * self.square_size, 7 * self.square_size))
-            elif piece == 'white_knight.png':
-                self.screen.blit(pawn_image, (1 * self.square_size, 7 * self.square_size))
-                self.screen.blit(pawn_image, (6 * self.square_size, 7 * self.square_size))
-            else:  # White pawns
-                for i in range(8):
-                    self.screen.blit(pawn_image, (i * self.square_size, 6 * self.square_size))
+    #         if piece == 'white_bishop.png':
+    #             self.screen.blit(pawn_image, (2 * self.square_size, 7 * self.square_size))  # (col, row)
+    #             self.screen.blit(pawn_image, (5 * self.square_size, 7 * self.square_size))
+    #         elif piece == 'white_king.png':
+    #             self.screen.blit(pawn_image, (3 * self.square_size, 7 * self.square_size))
+    #         elif piece == 'white_rook.png':
+    #             self.screen.blit(pawn_image, (0 * self.square_size, 7 * self.square_size))
+    #             self.screen.blit(pawn_image, (7 * self.square_size, 7 * self.square_size))
+    #         elif piece == 'white_queen.png':
+    #             self.screen.blit(pawn_image, (4 * self.square_size, 7 * self.square_size))
+    #         elif piece == 'white_knight.png':
+    #             self.screen.blit(pawn_image, (1 * self.square_size, 7 * self.square_size))
+    #             self.screen.blit(pawn_image, (6 * self.square_size, 7 * self.square_size))
+    #         else:  # White pawns
+    #             for i in range(8):
+    #                 self.screen.blit(pawn_image, (i * self.square_size, 6 * self.square_size))
 
-    def draw_black_pieces(self):
-        """
-        Draw the black chess pieces
-        """
-        for piece in self.black_Pieces:
-            pawn_image = pygame.image.load(os.path.join("Images", "pieces_photos", "black_pieces", piece))
-            pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
+    # def draw_black_pieces(self):
+    #     """
+    #     Draw the black chess pieces
+    #     """
+    #     for piece in self.black_Pieces:
+    #         pawn_image = pygame.image.load(os.path.join("Images", "pieces_photos", "black_pieces", piece))
+    #         pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
 
-            if piece == 'black_bishop.png':
-                self.screen.blit(pawn_image, (2 * self.square_size, 0 * self.square_size))  # (col, row)
-                self.screen.blit(pawn_image, (5 * self.square_size, 0 * self.square_size))
-            elif piece == 'black_king.png':
-                self.screen.blit(pawn_image, (3 * self.square_size, 0 * self.square_size))
-            elif piece == 'black_rook.png':
-                self.screen.blit(pawn_image, (0 * self.square_size, 0 * self.square_size))
-                self.screen.blit(pawn_image, (7 * self.square_size, 0 * self.square_size))
-            elif piece == 'black_queen.png':
-                self.screen.blit(pawn_image, (4 * self.square_size, 0 * self.square_size))
-            elif piece == 'black_knight.png':
-                self.screen.blit(pawn_image, (1 * self.square_size, 0 * self.square_size))
-                self.screen.blit(pawn_image, (6 * self.square_size, 0 * self.square_size))
-            else:  # Black pawns
-                for i in range(8):
-                    self.screen.blit(pawn_image, (i * self.square_size, 1 * self.square_size))
+    #         if piece == 'black_bishop.png':
+    #             self.screen.blit(pawn_image, (2 * self.square_size, 0 * self.square_size))  # (col, row)
+    #             self.screen.blit(pawn_image, (5 * self.square_size, 0 * self.square_size))
+    #         elif piece == 'black_king.png':
+    #             self.screen.blit(pawn_image, (3 * self.square_size, 0 * self.square_size))
+    #         elif piece == 'black_rook.png':
+    #             self.screen.blit(pawn_image, (0 * self.square_size, 0 * self.square_size))
+    #             self.screen.blit(pawn_image, (7 * self.square_size, 0 * self.square_size))
+    #         elif piece == 'black_queen.png':
+    #             self.screen.blit(pawn_image, (4 * self.square_size, 0 * self.square_size))
+    #         elif piece == 'black_knight.png':
+    #             self.screen.blit(pawn_image, (1 * self.square_size, 0 * self.square_size))
+    #             self.screen.blit(pawn_image, (6 * self.square_size, 0 * self.square_size))
+    #         else:  # Black pawns
+    #             for i in range(8):
+    #                 self.screen.blit(pawn_image, (i * self.square_size, 1 * self.square_size))
 
     def draw_circle(self, arr):
         posible_move = pygame.image.load(os.path.join("Images", "Grey_circle.png"))

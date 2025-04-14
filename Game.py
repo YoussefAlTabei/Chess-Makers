@@ -3,6 +3,11 @@ import Board
 from BoardPalettes import BoardPalettes as bp
 import Draw_Pieces as dp
 from Empty import Empty
+
+def redraw():
+    screen.fill((255, 255, 255))  # Fill the screen with a background color
+    chess_board.draw_board()  # Draw the chessboard
+    pieces.draw_pieces_from_array(board_Array)  # Draw the pieces on the board
 pygame.init()
 # Initialize the board as a 1D list with 64 elements
 board_Array = [Empty(_) for _ in range(64)]
@@ -13,13 +18,14 @@ dp.initate_pieces(board_Array)
 WINDOW_SIZE = (800, 800)  # Width and height of the window
 SQUARE_SIZE = WINDOW_SIZE[0] // 8
 screen = pygame.display.set_mode(WINDOW_SIZE)
-pygame.display.set_caption("Chess Game")
 chess_board = Board.Board(screen,bp.MODERN_BLUE)
-screen.fill((255, 255, 255))
-chess_board.draw_board()
 pieces = dp.Draw_pieces(screen,SQUARE_SIZE)
-pieces.draw_white_pieces()
-pieces.draw_black_pieces()
+pygame.display.set_caption("Chess Game")
+
+#################################################################################################3
+redraw()
+# pieces.draw_white_pieces()
+# pieces.draw_black_pieces()
 # Main game loop
 running = True
 temp = board_Array[35]
@@ -27,28 +33,24 @@ board_Array[35] = board_Array[58]
 board_Array[58] = temp
 board_Array[35].index = 35
 print(board_Array[35], board_Array[58])
-for p in board_Array:
-    #print(p,p.index)
-    if not isinstance(p, Empty):
-        print(p, p.index)
-        print(p.get_moves())
+# for p in board_Array:
+#     #print(p,p.index)
+#     if not isinstance(p, Empty):
+#         print(p, p.index)
+#         print(p.get_moves())
 
-chess_board = Board.Board(screen,bp.MODERN_BLUE)
-screen.fill((255, 255, 255))
-chess_board.draw_board()
-temp = board_Array[22]
-board_Array[22] = board_Array[3]
-print(board_Array[22], board_Array[3])
-board_Array[3].index = 3
-board_Array[3] = temp
-dp.Draw_pieces.draw_pieces_from_array(pieces, board_Array)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-          # pieces.handle_mouse_event(event)
-          pass
+            mouse_x, mouse_y = event.pos
+            row = mouse_y // SQUARE_SIZE
+            col = mouse_x // SQUARE_SIZE
+            index = row * 8 + col
+            moves = board_Array[index].get_moves()
+            print(moves)
+            print(f"Piece clicked at index: {index} {board_Array[index]}")
 
                     
     # Fill the screen with a background color 
