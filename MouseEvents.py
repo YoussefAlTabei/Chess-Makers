@@ -22,5 +22,9 @@ class event_handler():
             print (index)
             if not isinstance(board_Array[index], Empty):
                 moves = (board_Array[index].get_moves())
-                dp.draw_circle(moves)
+                for i in moves:
+                    if isinstance(board_Array[i], Empty):
+                        dp.draw_circle(i)
+                    else:
+                        dp.draw_sqr(i)
             

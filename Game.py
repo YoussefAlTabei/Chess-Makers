@@ -3,9 +3,12 @@ import Board
 from BoardPalettes import BoardPalettes as bp
 import Draw_Pieces as dp
 from Empty import Empty
-from MouseEvents import event_handler as eh
+try:
+    from MouseEvents import event_handler as eh
+except ModuleNotFoundError:
+    print("Error: 'MouseEvents' module not found. Ensure 'MouseEvents.py' exists in the same directory.")
+    eh = None
 def redraw():
-    screen.fill((255, 255, 255))  # Fill the screen with a background color
     chess_board.draw_board()  # Draw the chessboard
     pieces.draw_pieces_from_array(board_Array)  # Draw the pieces on the board
 pygame.init()

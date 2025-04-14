@@ -4,102 +4,95 @@ from Color import Color
 from Empty import Empty
 from PiecesFactory import WhiteFactory, BlackFactory
 
+
 class Draw_pieces:
     """
-    Class to draw the chess pieces
+    Class to draw the chess pieces.
     """
     white_Pieces = ['white_king.png', 'white_knight.png', 'white_bishop.png', 'white_pawn.png', 'white_queen.png', 'white_rook.png']
-    black_Pieces = ['black_bishop.png', 'black_king.png', 'black_knight.png', 'black_pawn.png', 'black_queen.png', 'black_rook.png']
+    black_Pieces = ['black_king.png', 'black_knight.png', 'black_bishop.png', 'black_pawn.png', 'black_queen.png', 'black_rook.png']
 
     def __init__(self, screen, square_size):
         """
-        Constructor
         :param screen: Pygame screen surface
         :param square_size: Size of each chess square in pixels
         """
         self.screen = screen
         self.square_size = square_size
-        self.selected_piece = None  # Track the selected piece
-        self.selected_piece_pos = None  # Track the position of the selected piece
-        self.dragging = False  # Track if a piece is being dragged
+        self.selected_piece = None
+        self.selected_piece_pos = None
+        self.dragging = False
 
-    # def draw_white_pieces(self):
-    #     """
-    #     Draw the white chess pieces
-    #     """
-    #     for piece in self.white_Pieces:
-    #         pawn_image = pygame.image.load(os.path.join("Images", "pieces_photos", "white_pieces", piece))
-    #         pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
+        self.piece_images = {}
+        self.circle_image = None
+        self.square_image = None
 
-    #         if piece == 'white_bishop.png':
-    #             self.screen.blit(pawn_image, (2 * self.square_size, 7 * self.square_size))  # (col, row)
-    #             self.screen.blit(pawn_image, (5 * self.square_size, 7 * self.square_size))
-    #         elif piece == 'white_king.png':
-    #             self.screen.blit(pawn_image, (3 * self.square_size, 7 * self.square_size))
-    #         elif piece == 'white_rook.png':
-    #             self.screen.blit(pawn_image, (0 * self.square_size, 7 * self.square_size))
-    #             self.screen.blit(pawn_image, (7 * self.square_size, 7 * self.square_size))
-    #         elif piece == 'white_queen.png':
-    #             self.screen.blit(pawn_image, (4 * self.square_size, 7 * self.square_size))
-    #         elif piece == 'white_knight.png':
-    #             self.screen.blit(pawn_image, (1 * self.square_size, 7 * self.square_size))
-    #             self.screen.blit(pawn_image, (6 * self.square_size, 7 * self.square_size))
-    #         else:  # White pawns
-    #             for i in range(8):
-    #                 self.screen.blit(pawn_image, (i * self.square_size, 6 * self.square_size))
+        self.load_images()
 
-    # def draw_black_pieces(self):
-    #     """
-    #     Draw the black chess pieces
-    #     """
-    #     for piece in self.black_Pieces:
-    #         pawn_image = pygame.image.load(os.path.join("Images", "pieces_photos", "black_pieces", piece))
-    #         pawn_image = pygame.transform.scale(pawn_image, (self.square_size, self.square_size))
+    def load_images(self):
+        """
+        Load and scale all chess piece images and helper UI images.
+        """
+        for piece in self.white_Pieces + self.black_Pieces:
+            piece_name = piece.split('.')[0]  # e.g., "white_king"
+            color = "white" if piece_name.startswith("white") else "black"
+            image_path = os.path.join("Images", "pieces_photos", f"{color}_pieces", piece)
+            try:
+                image = pygame.image.load(image_path)
+                image = pygame.transform.scale(image, (self.square_size, self.square_size))
+                self.piece_images[piece_name] = image
+            except pygame.error as e:
+                print(f"[ERROR] Couldn't load image '{image_path}': {e}")
 
-    #         if piece == 'black_bishop.png':
-    #             self.screen.blit(pawn_image, (2 * self.square_size, 0 * self.square_size))  # (col, row)
-    #             self.screen.blit(pawn_image, (5 * self.square_size, 0 * self.square_size))
-    #         elif piece == 'black_king.png':
-    #             self.screen.blit(pawn_image, (3 * self.square_size, 0 * self.square_size))
-    #         elif piece == 'black_rook.png':
-    #             self.screen.blit(pawn_image, (0 * self.square_size, 0 * self.square_size))
-    #             self.screen.blit(pawn_image, (7 * self.square_size, 0 * self.square_size))
-    #         elif piece == 'black_queen.png':
-    #             self.screen.blit(pawn_image, (4 * self.square_size, 0 * self.square_size))
-    #         elif piece == 'black_knight.png':
-    #             self.screen.blit(pawn_image, (1 * self.square_size, 0 * self.square_size))
-    #             self.screen.blit(pawn_image, (6 * self.square_size, 0 * self.square_size))
-    #         else:  # Black pawns
-    #             for i in range(8):
-    #                 self.screen.blit(pawn_image, (i * self.square_size, 1 * self.square_size))
+        # Load optional circle image for move indicators
+        try:
+            circle_path = os.path.join("Images", "Black_circle2.png")
+            circle_img = pygame.image.load(circle_path)
+            size = int(self.square_size * 0.25)
+            self.circle_image = pygame.transform.scale(circle_img, (size, size))
+        except pygame.error as e:
+            print(f"[ERROR] Couldn't load circle image: {e}")
 
-    def draw_circle(self, arr):
-        circle_size = int(self.square_size * 0.5)  # Make the circle smaller (50% of square size)
-        posible_move = pygame.image.load(os.path.join("Images", "Grey_circle.png"))
-        posible_move = pygame.transform.scale(posible_move, (circle_size, circle_size))
-        for i in arr:
-            x = (i % 8) * self.square_size + (self.square_size - circle_size) // 2  # Center the circle horizontally
-            y = (i // 8) * self.square_size + (self.square_size - circle_size) // 2  # Center the circle vertically
-            self.screen.blit(posible_move, (x, y))
+        # Optional highlight square image
+        try:
+            square_path = os.path.join("Images", "Square1.png")
+            square_img = pygame.image.load(square_path)
+            self.square_image = pygame.transform.scale(square_img, (self.square_size, self.square_size))
+        except pygame.error as e:
+            print(f"[WARNING] Couldn't load square image: {e}")
+
+    def draw_sqr(self, index):
+        """
+        Draw a highlight square at a given board index.
+        """
+        if self.square_image:
+            x = (index % 8) * self.square_size
+            y = (index // 8) * self.square_size
+            self.screen.blit(self.square_image, (x, y))
+
+    def draw_circle(self, index):
+        """
+        Draw a circle indicator at a given board index.
+        """
+        if self.circle_image:
+            x = (index % 8) * self.square_size + (self.square_size - self.circle_image.get_width()) // 2
+            y = (index // 8) * self.square_size + (self.square_size - self.circle_image.get_height()) // 2
+            self.screen.blit(self.circle_image, (x, y))
+
     def draw_pieces_from_array(self, board_Array):
         """
-        Draw the pieces on the board based on the board array
-        :param board_Array: Array representing the board state
+        Draw chess pieces based on the provided board array.
+        :param board_Array: A list representing the board, with piece instances or Empty.
         """
         for index, piece in enumerate(board_Array):
             if piece and not isinstance(piece, Empty) and hasattr(piece, 'color') and hasattr(piece, 'name'):
                 color = "white" if piece.color == Color.WHITE else "black"
-                piece_image = pygame.image.load(os.path.join("Images", "pieces_photos", f"{color}_pieces", f"{color}_{piece.name}.png"))
-                piece_image = pygame.transform.scale(piece_image, (self.square_size, self.square_size))
-                # Flip the board vertically to make white at the bottom and black at the top
-                x = (index % 8) * self.square_size
-                y = (index // 8) * self.square_size
-                # Debugging: Ensure piece attributes are correct
-                # if not piece.name or not piece.color:
-                #     print(f"Error: Piece at index {index} is missing attributes.")
-                # else:
-                #     print(index, piece.name, piece.color, x, y)
-                self.screen.blit(piece_image, (x, y))
+                piece_key = f"{color}_{piece.name.lower()}"  # e.g., "white_king"
+                if piece_key in self.piece_images:
+                    piece_image = self.piece_images[piece_key]
+                    x = (index % 8) * self.square_size
+                    y = (index // 8) * self.square_size
+                    self.screen.blit(piece_image, (x, y))
 @staticmethod
 def initate_pieces(board_Array):
     white_factory = WhiteFactory()
