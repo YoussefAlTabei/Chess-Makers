@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import Color
 from PinStatus import PinStatus
 
@@ -19,6 +19,9 @@ class Piece(ABC):
             str: A string in the format "{color} {class name}".
         """
         return f"{self.color.value} {self.__class__.__name__}"
+    @abstractmethod
+    def get_legal_moves(self):
+        pass
 
     def check_Orthogonal_pin(self, king_index, piece_index,arr):
         """
