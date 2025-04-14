@@ -20,7 +20,7 @@ class Piece(ABC):
         """
         return f"{self.color.value} {self.__class__.__name__}"
     @abstractmethod
-    def get_legal_moves(self):
+    def get_moves(self):
         pass
 
     def check_Orthogonal_pin(self, king_index, piece_index,arr):
