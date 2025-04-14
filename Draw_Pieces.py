@@ -74,10 +74,13 @@ class Draw_pieces:
     #                 self.screen.blit(pawn_image, (i * self.square_size, 1 * self.square_size))
 
     def draw_circle(self, arr):
+        circle_size = int(self.square_size * 0.5)  # Make the circle smaller (50% of square size)
         posible_move = pygame.image.load(os.path.join("Images", "Grey_circle.png"))
-        posible_move = pygame.transform.scale(posible_move, (self.square_size, self.square_size))
+        posible_move = pygame.transform.scale(posible_move, (circle_size, circle_size))
         for i in arr:
-            self.screen.blit(posible_move, (i % 8 * self.square_size, i // 8 * self.square_size))
+            x = (i % 8) * self.square_size + (self.square_size - circle_size) // 2  # Center the circle horizontally
+            y = (i // 8) * self.square_size + (self.square_size - circle_size) // 2  # Center the circle vertically
+            self.screen.blit(posible_move, (x, y))
     def draw_pieces_from_array(self, board_Array):
         """
         Draw the pieces on the board based on the board array

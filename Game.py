@@ -3,7 +3,7 @@ import Board
 from BoardPalettes import BoardPalettes as bp
 import Draw_Pieces as dp
 from Empty import Empty
-
+from MouseEvents import event_handler as eh
 def redraw():
     screen.fill((255, 255, 255))  # Fill the screen with a background color
     chess_board.draw_board()  # Draw the chessboard
@@ -38,19 +38,21 @@ print(board_Array[35], board_Array[58])
 #     if not isinstance(p, Empty):
 #         print(p, p.index)
 #         print(p.get_moves())
-
+redraw()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = event.pos
-            row = mouse_y // SQUARE_SIZE
-            col = mouse_x // SQUARE_SIZE
-            index = row * 8 + col
-            moves = board_Array[index].get_moves()
-            print(moves)
-            print(f"Piece clicked at index: {index} {board_Array[index]}")
+            # mouse_x, mouse_y = event.pos
+            # row = mouse_y // SQUARE_SIZE
+            # col = mouse_x // SQUARE_SIZE
+            # index = row * 8 + col
+            # moves = board_Array[index].get_moves()
+            # print(moves)
+            # print(f"Piece clicked at index: {index} {board_Array[index]}")
+            redraw()
+            eh.left_click(event, board_Array, pieces)
 
                     
     # Fill the screen with a background color 
