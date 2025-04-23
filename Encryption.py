@@ -64,4 +64,4 @@ def decrypt_room_code(code):
     print(ip)
     IP = ipcrypt.decrypt(ip)
     print("Decrypted IP:", IP)
-decrypt(code)
+decrypt_room_code(code)
