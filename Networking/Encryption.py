@@ -1,5 +1,5 @@
 import socket
-import ipcrypt
+import Networking.ipcrypt as ipcrypt
 import random
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -23,9 +23,9 @@ def Generate_room_code():
     encrypted_ip = (ipcrypt.encrypt(get_local_ip())).split('.')
     print("Encrypted IP:", encrypted_ip)
     encrypted_ip = [hex(int(x)) for x in encrypted_ip]
-    print(encrypted_ip)
+   # print(encrypted_ip)
     rand = random.randrange(1, 16)
-    print("Random number:", rand)
+   # print("Random number:", rand)
     encrypted_ip = [hex(int(x, 16) - rand) for x in encrypted_ip]
     encrypted_ip.insert(0,rand)
     room_code = ""
@@ -48,20 +48,21 @@ def decrypt_room_code(code):
         str: The decrypted IP address.
     '''
     key = int(code[0], 16)
-    print("Key:", key)
+    #print("Key:", key)
     code = code[1:]
     ip_lst = []
     for i in range(0,len(code),2):
        # print(i)
         ip_lst.append(code[i:(i+2)])
         #code = code[(i+2):]
-    print(ip_lst)
+    #print(ip_lst)
     ip_lst = [hex(int(x, 16) + key) for x in ip_lst]
-    print(ip_lst)
+    #print(ip_lst)
     ip_lst = [int(x, 16) for x in ip_lst]
-    print(ip_lst)
+  #  print(ip_lst)
     ip = '.'.join(map(str, ip_lst))
-    print(ip)
+   # print(ip)
     IP = ipcrypt.decrypt(ip)
     print("Decrypted IP:", IP)
-decrypt_room_code(code)
+    return IP
+print(decrypt_room_code(code))

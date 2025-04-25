@@ -1,5 +1,5 @@
 import pygame
-import Board
+import UI.Board as Board
 from BoardPalettes import BoardPalettes as bp
 import Draw_Pieces as dp
 from Empty import Empty
