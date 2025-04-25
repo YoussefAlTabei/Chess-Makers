@@ -1,3 +1,5 @@
+import config  # Will auto set paths
+
 import pygame
 import UI.Board as Board
 from BoardPalettes import BoardPalettes as bp
