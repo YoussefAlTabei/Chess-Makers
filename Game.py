@@ -6,9 +6,9 @@ from BoardPalettes import BoardPalettes as bp
 import Draw_Pieces as dp
 from Empty import Empty
 from Draw_legal_moves import draw_legal
-from Game_logic.Movement import move_piece
+from Game_logic.Movement import Movement as mv
 from MouseEvents import event_handler as eh
-
+from Color import Color
     
 ########################### Intialization ##########################################################
 def redraw():
@@ -18,7 +18,7 @@ pygame.init()
 # Initialize the board as a 1D list with 64 elements
 board_Array = [Empty(_) for _ in range(64)]
 # Create factories for white and black pieces
-dp.initate_pieces(board_Array)
+dp.initiate_pieces(board_Array)
 
 
 #################################### Set up the display ####################################################
@@ -31,51 +31,74 @@ pieces = dp.Draw_pieces(screen,SQUARE_SIZE)
 pygame.display.set_caption("Chess Game")
 
 ############################### Flags ##########################################################
-testing = False
+testing = True
 white_turn = True
 running = True
-clicked = False  # Flag to track if a piece is clicked
+clicked = True# Flag to track if a piece is clicked
+drawing = False
+moved = False
+piece_selected = False
+piece = None  # The piece that is currently selected
 ############################## Game Logic ###################################################################3
 redraw()
 
-if testing:
-    for p in board_Array:
-        if not isinstance(p, Empty):
-            print(p, p.index)
-            print(p.get_moves())
-
-redraw()
+moves = []  # List to store legal moves for the selected piece
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            if drawing:
+                try:
+                    for i in drawn_moves:
+                        pieces.redraw_square(i,board_Array,chess_board)  # Redraw the square to erase the circle
+                    print("Cleared drawn moves")
+                except Exception as e:
+                    print(e) # Erase the circle at the index
+                drawing = False
+            index = eh.left_click(event, board_Array, pieces) 
             if testing:
-                mouse_x, mouse_y = event.pos
-                row = mouse_y // SQUARE_SIZE
-                col = mouse_x // SQUARE_SIZE
-                index = row * 8 + col
-                moves = board_Array[index].get_moves()
-                print(moves)
-                print(f"Piece clicked at index: {index} {board_Array[index]}")
-            redraw()
-            index = eh.left_click(event, board_Array, pieces)
-            
-            if clicked  and index is not None and index in moves:
+                print(f"Index: {index}")
+            if piece_selected  and index in moves: # and not isinstance(board_Array[index], Empty):
+                print("here")
+                try:
+                    if piece.color == Color.WHITE and not white_turn:
+                        continue
+                    elif piece.color == Color.BLACK and white_turn:
+                        continue
+                except Exception as e:
+                    print(e)
+                temp = piece.index
+                mv.move_piece(board_Array,piece.index, index)
                 if testing:
-                    print(f"Moving piece from index {index} to {moves[0]}")
-                pieces.move_piece(board_Array, index, moves[0])
-                redraw()
-                #clicked = True
-            if clicked == False and  index is not None and not isinstance(board_Array[index], Empty):
-                if not isinstance(board_Array[index], Empty):
-                    moves = (board_Array[index].get_moves())
-                if testing:
-                    print(f"Piece clicked at index: {index} {board_Array[index]}")
-                draw_legal(board_Array, index, pieces)
-            if clicked == True:
+                    print("Piece moved")
+                pieces.redraw_square(temp,board_Array,chess_board)
+                pieces.redraw_square(index,board_Array,chess_board)
+                drawing = False
+                white_turn = not white_turn
+                moved = True
+                piece_selected = False
                 moves = []
-            clicked != clicked       
+                piece = Empty(index)  # Reset the piece to an empty piece
+            if not isinstance(board_Array[index], Empty):
+                moves = board_Array[index].get_moves()
+            piece = board_Array[index]
+            if not isinstance(piece, Empty):
+                    piece_selected = True
+            if testing:
+                print(f"{piece} clicked at index: {index}, piece_Selected: {piece_selected}, moves: {moves}")
+                    # if testing:
+                    #     print(f"Piece clicked at index: {index} {board_Array[index]}")
+                    #     print("Legal moves: ", moves)
+                    #     print(f"Piece clicked at index: {index} {board_Array[index]}")
+            if not moved and not isinstance(board_Array[index], Empty):
+                drawn_moves = draw_legal(board_Array, index, pieces)
+                drawing = True
+                if testing:
+                    print(f"Legal moves drawn for piece at index {index}: {drawn_moves}")  
+
+                #print(f"Moves: {moves}")
+            moved = False
     # Fill the screen with a background color 
 
 

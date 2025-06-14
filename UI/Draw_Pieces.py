@@ -3,7 +3,7 @@ import os
 from Color import Color
 from Empty import Empty
 from PiecesFactory import WhiteFactory, BlackFactory
-
+from Board import Board
 
 class Draw_pieces:
     """
@@ -69,15 +69,18 @@ class Draw_pieces:
             x = (index % 8) * self.square_size
             y = (index // 8) * self.square_size
             self.screen.blit(self.square_image, (x, y))
-
     def draw_circle(self, index):
-        """
-        Draw a circle indicator at a given board index.
-        """
+        ''' 
+        Draw a circle at a given board index to indicate a legal move.
+        :param index: Board index (0-63)    
+        
+        '''
+        x = (index % 8) * self.square_size
+        y = (index // 8) * self.square_size
         if self.circle_image:
-            x = (index % 8) * self.square_size + (self.square_size - self.circle_image.get_width()) // 2
-            y = (index // 8) * self.square_size + (self.square_size - self.circle_image.get_height()) // 2
-            self.screen.blit(self.circle_image, (x, y))
+            cx = x + (self.square_size - self.circle_image.get_width()) // 2
+            cy = y + (self.square_size - self.circle_image.get_height()) // 2
+            self.screen.blit(self.circle_image, (cx, cy))
 
     def draw_pieces_from_array(self, board_Array):
         """
@@ -93,8 +96,20 @@ class Draw_pieces:
                     x = (index % 8) * self.square_size
                     y = (index // 8) * self.square_size
                     self.screen.blit(piece_image, (x, y))
+    def redraw_square(self, index,boardArray,board: Board):
+        board.draw_square(index // 8, index % 8)
+        piece = boardArray[index]
+        if piece and not isinstance(piece, Empty) and hasattr(piece, 'color') and hasattr(piece, 'name'):
+                color = "white" if piece.color == Color.WHITE else "black"
+                piece_key = f"{color}_{piece.name.lower()}"  # e.g., "white_king"
+                if piece_key in self.piece_images:
+                    piece_image = self.piece_images[piece_key]
+                    x = (index % 8) * self.square_size
+                    y = (index // 8) * self.square_size
+                    self.screen.blit(piece_image, (x, y))
+
 @staticmethod
-def initate_pieces(board_Array):
+def initiate_pieces(board_Array):
     white_factory = WhiteFactory()
     black_factory = BlackFactory()
 

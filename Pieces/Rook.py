@@ -54,12 +54,12 @@ class Rook(Piece):
                     temp = self.index + 1
                 while temp <= 63 and temp >= 0 and temp % 8 != 0 and isinstance(self.arr[temp], Empty.Empty):
                     legal_moves.append(temp)
-                    temp += 1 *color_dir
+                    temp += 1 
                 if temp <= 63 and temp >= 0 and not isinstance(self.arr[temp], Empty.Empty) and self.arr[temp].color != self.color:
                     legal_moves.append(temp)
                 while temp2 <= 63 and temp2 >= 0 and temp2 % 8 != 7 and  isinstance(self.arr[temp2], Empty.Empty):
                     legal_moves.append(temp2)
-                    temp2 -= 1*color_dir
+                    temp2 -= 1
                 if temp2 <= 63 and temp2 >= 0 and not isinstance(self.arr[temp2], Empty.Empty) and self.arr[temp2].color != self.color:
                     legal_moves.append(temp2)
         return legal_moves

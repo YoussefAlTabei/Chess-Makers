@@ -32,7 +32,20 @@ class Board:
                     # print(color)
                 pygame.draw.rect(self.screen, color, [col * 100, row * 100, 100, 100])
         pygame.display.update()
-
+    
+    def draw_square(self, row: int, col: int):
+        """
+        Draw a single square at the given row and column index
+        :param row: Row index (0-7)
+        :param col: Column index (0-7)
+        :return: None
+        """
+        if (row + col) % 2 == 0:
+            color = self.palette[1]
+        else:
+            color = self.palette[0]
+        pygame.draw.rect(self.screen, color, [col * 100, row * 100, 100, 100])
+        pygame.display.update(pygame.Rect(col * 100, row * 100, 100, 100))
     def set_palette(self, palette: BoardPalettes):
         """
         Set the palette of the board

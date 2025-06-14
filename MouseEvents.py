@@ -17,7 +17,7 @@ class event_handler():
             mouse_x, mouse_y = pygame.mouse.get_pos()
             row = mouse_y // dp.square_size
             col = mouse_x // dp.square_size
-            print(row, col)
+         #   print(row, col)
             index = row * 8 + col
-            print (index)
+           # print (index)
         return index
