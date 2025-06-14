@@ -9,7 +9,7 @@ from Draw_legal_moves import draw_legal
 from Game_logic.Movement import Movement as mv
 from MouseEvents import event_handler as eh
 from Color import Color
-    
+from Pin import Pin     
 ########################### Intialization ##########################################################
 def redraw():
     chess_board.draw_board()  # Draw the chessboard
@@ -81,25 +81,24 @@ while running:
                 moves = []
                 piece = Empty(index)  # Reset the piece to an empty piece
             if not isinstance(board_Array[index], Empty):
+                board_Array[index].pin_status = Pin.pin_check(index,board_Array) 
+                if testing:
+                    print(f"Pin status for piece at index {index}: {board_Array[index].pin_status}")
                 moves = board_Array[index].get_moves()
             piece = board_Array[index]
             if not isinstance(piece, Empty):
                     piece_selected = True
             if testing:
                 print(f"{piece} clicked at index: {index}, piece_Selected: {piece_selected}, moves: {moves}")
-                    # if testing:
-                    #     print(f"Piece clicked at index: {index} {board_Array[index]}")
-                    #     print("Legal moves: ", moves)
-                    #     print(f"Piece clicked at index: {index} {board_Array[index]}")
+
             if not moved and not isinstance(board_Array[index], Empty):
                 drawn_moves = draw_legal(board_Array, index, pieces)
                 drawing = True
                 if testing:
                     print(f"Legal moves drawn for piece at index {index}: {drawn_moves}")  
 
-                #print(f"Moves: {moves}")
             moved = False
-    # Fill the screen with a background color 
+
 
 
 # Update the display

@@ -1,10 +1,10 @@
 from Pieces import Piece
 from Empty import Empty
-from PinStatus import PinStatus as PS
+from Game_logic.PinStatus import PinStatus as PS
 from Rook import Rook
 from Bishop import Bishop
 from Empty import Empty
-from PinStatus import PinStatus as PS
+from Game_logic.PinStatus import PinStatus as PS
 from Rook import Rook
 from Bishop import Bishop
 class Queen(Rook, Bishop):

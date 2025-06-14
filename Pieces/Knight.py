@@ -1,6 +1,6 @@
 from Pieces import Piece
-from PinStatus import PinStatus as PS
-from Color import Color as c
+from Game_logic.PinStatus import PinStatus as PS
+from Game_logic.Color import Color as c
 from Empty import Empty
 class Knight(Piece):
     def __init__(self, color, index, arr):

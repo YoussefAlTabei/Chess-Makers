@@ -1,8 +1,8 @@
 from Pieces import Piece
-from PinStatus import PinStatus
-from PinStatus import PinStatus
+from Game_logic.PinStatus import PinStatus
+from Game_logic.PinStatus import PinStatus
 import Empty
-from Color import Color as c
+from Game_logic.Color import Color as c
 class Rook(Piece):
     def __init__(self, color, index, arr):
         super().__init__(color, arr,index)

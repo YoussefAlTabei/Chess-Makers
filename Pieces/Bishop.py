@@ -1,8 +1,8 @@
 from Pieces import Piece
-from PinStatus import PinStatus as PS
-from PinStatus import PinStatus as PS
+from Game_logic.PinStatus import PinStatus as PS
+from Game_logic.PinStatus import PinStatus as PS
 import Empty
-from Color import Color as c 
+from Game_logic.Color import Color as c 
 class Bishop(Piece):
     def __init__(self, color, index, arr):
         super().__init__(color,arr, index)

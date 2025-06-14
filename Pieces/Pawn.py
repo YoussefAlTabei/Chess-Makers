@@ -1,6 +1,6 @@
 from Pieces import Piece
-from PinStatus import PinStatus
-from Color import Color as c
+from Game_logic.PinStatus import PinStatus
+from Game_logic.Color import Color as c
 import Empty
 class Pawn(Piece):
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC
 
 from Bishop import Bishop
-from Color import Color
+from Game_logic.Color import Color
 from King import King
 from Knight import Knight
 from Pawn import Pawn

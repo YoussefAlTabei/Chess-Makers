@@ -5,7 +5,7 @@ from Bishop import Bishop
 from Queen import Queen
 from Knight import Knight
 from Pawn import Pawn
-from Color import Color as c
+from Game_logic.Color import Color as c
 class King(Piece):
     """
     King class that inherits from Piece

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-import Color
-from PinStatus import PinStatus
+import Game_logic.Color as Color
+from Game_logic.PinStatus import PinStatus
 
 
 class Piece(ABC):
