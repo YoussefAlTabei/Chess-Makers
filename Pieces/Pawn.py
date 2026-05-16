@@ -36,13 +36,12 @@ class Pawn(Piece):
                 if isinstance(self.arr[self.index + 16* color_direction], Empty.Empty):
                     if not self.has_moved:
                         legal_moves.append(self.index + 16* color_direction)
-        if self.pin_state != PinStatus.PINNED_VERT and self.pin_state != PinStatus.PINNED_HORZ:
-            if not isinstance(self.arr[self.index + 7* color_direction], Empty.Empty) and self.index % 8 != 0 and self.arr[self.index + 7* color_direction].color != self.color:
-                legal_moves.append(self.index + 7* color_direction)
-            if not isinstance(self.arr[self.index + 9* color_direction], Empty.Empty) and self.index % 8 != 7 and self.arr[self.index + 9* color_direction].color != self.color:
-                legal_moves.append(self.index + 9* color_direction)  
+        if not isinstance(self.arr[self.index + 7* color_direction], Empty.Empty) and self.index % 8 != 0 and self.arr[self.index + 7* color_direction].color != self.color:
+            legal_moves.append(self.index + 7* color_direction)
+        if not isinstance(self.arr[self.index + 9* color_direction], Empty.Empty) and self.index % 8 != 7 and self.arr[self.index + 9* color_direction].color != self.color:
+            legal_moves.append(self.index + 9* color_direction)  
         if not isinstance(self.arr[self.index -1 * color_direction], Empty.Empty) and self.arr[self.index-1* color_direction].color != self.color and isinstance(self.arr[self.index-1* color_direction], Pawn) and self.arr[self.index-1* color_direction].en_passant:
             legal_moves.append(self.index-7 * color_direction)
         if not isinstance(self.arr[self.index + 1 * color_direction], Empty.Empty) and self.arr[self.index+1* color_direction].color != self.color and isinstance(self.arr[self.index+1* color_direction], Pawn) and self.arr[self.index+1* color_direction].en_passant:
             legal_moves.append(self.index+9 * color_direction )
-        return legal_moves
+        return legal_moves     return legal_moves

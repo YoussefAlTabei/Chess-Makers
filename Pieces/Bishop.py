@@ -30,7 +30,6 @@ class Bishop(Piece):
         """
         legal_moves = []
        # color_dir = 1 if self.color == c.WHITE else -1
-        if self.pin_state != PS.PINNED_HORZ and self.pin_state != PS.PINNED_VERT:
             legal_moves = []
             temp = self.index + 7 
             while temp <= 63 and temp >= 0 and temp % 8 != 0 and temp > 7 and (isinstance(self.arr[temp], Empty.Empty) or self.arr[temp].color != self.color):

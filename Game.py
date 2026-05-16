@@ -8,8 +8,8 @@ from Empty import Empty
 from Draw_legal_moves import draw_legal
 from Game_logic.Movement import Movement as mv
 from MouseEvents import event_handler as eh
-from Color import Color
-from Pin import Pin     
+from Color import Color     
+from Game_logic.Validator import Validator
 ########################### Intialization ##########################################################
 def redraw():
     chess_board.draw_board()  # Draw the chessboard
@@ -39,6 +39,7 @@ drawing = False
 moved = False
 piece_selected = False
 piece = None  # The piece that is currently selected
+game_status = "CONTINUE"
 ############################## Game Logic ###################################################################3
 redraw()
 
@@ -47,6 +48,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        
+        if game_status != "CONTINUE":
+            continue
+
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if drawing:
                 try:
@@ -59,8 +64,9 @@ while running:
             index = eh.left_click(event, board_Array, pieces) 
             if testing:
                 print(f"Index: {index}")
-            if piece_selected  and index in moves: # and not isinstance(board_Array[index], Empty):
-                print("here")
+            
+            # 1. Handle Move Execution
+            if piece_selected and index in moves:
                 try:
                     if piece.color == Color.WHITE and not white_turn:
                         continue
@@ -68,35 +74,47 @@ while running:
                         continue
                 except Exception as e:
                     print(e)
+                
                 temp = piece.index
-                mv.move_piece(board_Array,piece.index, index)
+                mv.move_piece(board_Array, piece.index, index)
+                
                 if testing:
                     print("Piece moved")
-                pieces.redraw_square(temp,board_Array,chess_board)
-                pieces.redraw_square(index,board_Array,chess_board)
-                drawing = False
+                
+                pieces.redraw_square(temp, board_Array, chess_board)
+                pieces.redraw_square(index, board_Array, chess_board)
+                
                 white_turn = not white_turn
                 moved = True
                 piece_selected = False
                 moves = []
-                piece = Empty(index)  # Reset the piece to an empty piece
-            if not isinstance(board_Array[index], Empty):
-                board_Array[index].pin_status = Pin.pin_check(index,board_Array) 
-                if testing:
-                    print(f"Pin status for piece at index {index}: {board_Array[index].pin_status}")
-                moves = board_Array[index].get_moves()
-            piece = board_Array[index]
-            if not isinstance(piece, Empty):
+                piece = Empty(index)
+                
+                # Check for Checkmate/Stalemate after move
+                game_status = Validator.is_checkmate(board_Array, Color.WHITE if white_turn else Color.BLACK)
+                if game_status != "CONTINUE":
+                    print(f"Game Over: {game_status}")
+
+            # 2. Handle Piece Selection
+            elif not isinstance(board_Array[index], Empty):
+                if (board_Array[index].color == Color.WHITE and white_turn) or \
+                   (board_Array[index].color == Color.BLACK and not white_turn):
+                    
+                    # Use Validator for legal moves
+                    moves = Validator.get_legal_moves(board_Array, index)
+                    piece = board_Array[index]
                     piece_selected = True
-            if testing:
-                print(f"{piece} clicked at index: {index}, piece_Selected: {piece_selected}, moves: {moves}")
+                    
+                    if testing:
+                        print(f"Selected {piece} at {index}. Legal moves: {moves}")
 
-            if not moved and not isinstance(board_Array[index], Empty):
-                drawn_moves = draw_legal(board_Array, index, pieces)
-                drawing = True
-                if testing:
-                    print(f"Legal moves drawn for piece at index {index}: {drawn_moves}")  
-
+            # 3. Handle Drawing Legal Moves
+            if moved:
+                drawing = False
+            elif piece_selected and not isinstance(board_Array[index], Empty):
+                 drawn_moves = draw_legal(board_Array, index, pieces, moves_override=moves) 
+                 drawing = True
+            
             moved = False
 
 

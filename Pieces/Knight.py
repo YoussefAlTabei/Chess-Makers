@@ -26,7 +26,6 @@ class Knight(Piece):
         """
         legal_moves = []
         color_dir = -1 if self.color == c.WHITE else 1
-        if self.pin_state == PS.NOT_PINNED:
             if self.index % 8 != 0 and self.index > 15 and (isinstance(self.arr[self.index - 17], Empty) or self.arr[self.index - 17].color != self.color):
                 legal_moves.append(self.index - 17)
             if self.index % 8 != 0 and self.index < 48 and (isinstance(self.arr[self.index + 15], Empty) or self.arr[self.index + 15].color != self.color):
